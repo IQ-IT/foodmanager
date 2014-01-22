@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/site.css')
+  body(ng-app='foodManagerApp')
+    div
+        div.navbar.navbar-default.navbar-fixed-top(role='navigation')
+            div.container
+                div.navbar-header
+                    a.navbar-brand(href='/') FoodManager
+                div.navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href='#/plan') Ugeplan
+                        li
+                            a(href='#/shop') Indkøb
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a(href='#/settings') Indstillinger
+        div.container
+            block content
+    script(src='/javascripts/libs/jquery-2.0.3.min.js')
+    script(src='/javascripts/libs/angular.min.js')
+    script(src='/javascripts/libs/bootstrap.js')
+    script.
+        var foodManagerApp = angular.module('foodManagerApp', []);
+    block scripts

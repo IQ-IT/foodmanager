@@ -1,0 +1,13 @@
+#mainContent {
+  padding: 60px 0;
+}
+table.liItems {
+  margin: 20px 0;
+  padding: 0;
+}
+table.liItems td {
+  font-size: 1.5em;
+}
+table.liItems td.item {
+  padding: 10px 20px 10px 0;
+}
