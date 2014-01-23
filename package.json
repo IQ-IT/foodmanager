@@ -10,7 +10,8 @@
     "jade": "*",
     "less-middleware": "*",
     "nconf": "~0.6.9",
-    "azure": "~0.8.0"
+    "azure": "~0.8.0",
+    "lodash-node": "~2.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
