@@ -57,6 +57,20 @@ AzureTableStorage.prototype = {
                 callback(items);
             }
         });
+    },
+    delete: function(id, callback) {
+        var self = this;
+        var entityid = {
+            PartitionKey: self.partitionKey,
+            RowKey: id
+        }
+        self.storageClient.deleteEntity(self.tableName, entityid, function(error) {
+            if (error) {
+                callback(error)
+            } else {
+                callback();
+            }
+        });
     } 
 };
 

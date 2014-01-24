@@ -31,7 +31,7 @@ CategoryRepo.prototype = {
     },
     delete: function(id, callback) {
         var self = this;
-        // self.storage.delete(category, callback);
+        self.storage.delete(id, callback);
     },
     getAll: function(callback) {
         var self = this;

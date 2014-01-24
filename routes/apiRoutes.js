@@ -35,7 +35,14 @@ function getCategory(req, res) {
 
 // DELETE /api/category/:id
 function deleteCategory(req, res) {
-    // TODO: Implement
+    var repo = new CategoryRepo();
+    repo.delete(req.param('id'), function(error) {
+        if (error) {
+            res.send(500, error);
+            return;
+        }
+        res.send(204);
+    });
 }
 
 // PUT /api/categories/add
@@ -51,6 +58,7 @@ function addCategory(req, res) {
 
 exports.createRoutes = function(app) {
     app.get('/api/categories', getCategories);
+    app.put('/api/category', addCategory);
     app.get('/api/category/:id', getCategory);
-    app.put('/api/categories/add', addCategory);
+    app.delete('/api/category/:id', deleteCategory);
 }
