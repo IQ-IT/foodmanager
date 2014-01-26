@@ -5,6 +5,7 @@
 
 var azure = require('azure');
 var nconf = require('nconf');
+var _ = require('lodash-node/underscore');
 var AzureTableStorage = require('./AzureTableStorage');
 var Category = require('./Category');
 
@@ -23,7 +24,17 @@ CategoryRepo.prototype = {
     },
     get: function(id, callback) {
         var self = this;
-        self.storage.get(id, callback);
+        self.storage.get(id, function(result) {
+            console.log(result);
+            if (result.statuscode) {
+                callback({
+                    errorCode: '404',
+                    errorText: 'No category found'
+                });
+                return;
+            }
+            callback(new Category(result.id, result.name));
+        });
     },
     update: function(category, callback) {
         var self = this;
@@ -35,7 +46,20 @@ CategoryRepo.prototype = {
     },
     getAll: function(callback) {
         var self = this;
-        self.storage.getAll(callback);
+        self.storage.getAll(function(result) {
+            if (result.length === 0) {
+                //  Nothing was found
+                callback({
+                    errorCode: '204',
+                    errorText: 'No categories found!'
+                });
+                return;
+            }
+            cats = _.map(result, function(c) {
+                return new Category(c.id, c.name);
+            });
+            callback(cats);
+        });
     }
 }
 

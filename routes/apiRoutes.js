@@ -10,14 +10,24 @@ var CategoryRepo = require('../modules/CategoryRepo');
  // GET /api/categories
 function getCategories(req, res) {
     repo = new CategoryRepo();
-    repo.getAll(function(result) {
-        if (!Array.isArray(result)) {
-            res.send(404, 'No data found!');
+    // test for query
+    if (!Object.keys(req.query).length) {
+        repo.getAll(function(result) {
+            if (result.errorCode) {
+                res.send(result.errorCode, result.errorText);
+                return;
+            }
+            res.json(result);
+        });
+        return;
+    }
+    // perform query
+    repo.queryAll(req.query, function(result) {
+        if (result.errorCode) {
+            res.send(result.errorCode, result.errorText);
             return;
         }
-        // transform result to categorylist
-        var cats = _.map(result, function(c) { return new Category(c.id, c.name); });
-        res.json(cats);
+        res.json(result); 
     });
 };
 
@@ -25,11 +35,12 @@ function getCategories(req, res) {
 function getCategory(req, res) {
     repo = new CategoryRepo();
     repo.get(req.param('id'), function(result) {
-        if (result.statusCode) {
-            res.send(404);
+        if (result.errorCode) {
+            console.log(result);
+            res.send(result.errorCode, result.errorText);
             return;
         }
-        res.json(new Category(result.id, result.name));
+        res.json(result);
     });
 };
 

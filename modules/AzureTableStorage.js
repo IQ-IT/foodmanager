@@ -26,7 +26,6 @@ AzureTableStorage.prototype = {
         item.RowKey = item.id;
         item.PartitionKey = self.partitionKey;
         // Insert item
-        console.log(item);
         self.storageClient.insertEntity(self.tableName, item, function(error) {
             if (error) {
                 callback(error);
@@ -49,7 +48,8 @@ AzureTableStorage.prototype = {
         var self = this;
         var query = azure.TableQuery
             .select()
-            .from(self.tableName);
+            .from(self.tableName)
+            .where('PartitionKey == ?', self.partitionKey);
         self.storageClient.queryEntities(query, function(error, items) {
             if (error) {
                 callback(error);
