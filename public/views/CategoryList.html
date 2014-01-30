@@ -1,0 +1,24 @@
+<!-- Categorylist view -->
+
+<div id="CategoryList">
+<h1>{{header}}</h1>
+
+<form class="span12">
+    <input name="addItem" ng-model="addItemText" />
+    <button class="btn button-sm button-success" ng-click="addItem()">Add</button>
+
+    <table class="liItems span12" ng-hide="">
+        <tbody>
+            <tr ng-repeat="category in categories">
+                <td class="item">{{category.name}}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" ng-click="removeItem(category)">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</form>
+</div>

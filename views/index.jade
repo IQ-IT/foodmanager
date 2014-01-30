@@ -2,20 +2,8 @@ extends layout
 
 block content
     div#mainContent(ng-controller='foodManager.indexController')
-        h1
-            {{header}}
-        form.span12
-            input(name='addItem',ng-model='addItemTxt')
-            button.btn.btn-sm.btn-success(ng-click='addItem()')
-                | Add
-        table.liItems.span12
-            tr(ng-repeat='category in categories')
-                td.item
-                    | {{category.name}}
-                td
-                    button.btn.btn-sm.btn-danger(ng-click='removeItem(category)')
-                        span.glyphicon.glyphicon-remove-circle
-                        | &nbsp;Delete
+        ng-view
 
 block scripts
     script(src='/javascripts/controllers/foodManager.controllers.js')
+    script(src='/javascripts/app.js')
