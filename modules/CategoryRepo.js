@@ -55,11 +55,40 @@ CategoryRepo.prototype = {
                 });
                 return;
             }
-            cats = _.map(result, function(c) {
+            var cats = _.map(result, function(c) {
                 return new Category(c.id, c.name);
             });
             callback(cats);
         });
+    },
+    getByName: function(name, callback) {
+        var self = this;
+        var qry = azure.TableQuery
+            .select()
+            .from(self.tableName)
+            .where('PartitionKey == ?', self.partitionKey)
+            .and('name eq ?', name);
+        console.log(qry);
+        // execute query
+        self.storage.storageClient.queryEntities(qry, function(error, items) {
+            if (error) {
+                callback({errorCode: '500', errorText: 'Error performing query!'});
+                return;
+            }
+            if (items.length === 0) {
+                callback({errorCode: '204'});
+                return;
+            }
+            var cats = _.map(items, function(c) {
+                return new Category(c.id, c.name);
+            })
+            callback(cats);
+        });
+    },
+    queryAll: function(qry, callback) {
+        var self = this;
+        console.log(qry);
+        callback({errorCode: '204'});
     }
 }
 

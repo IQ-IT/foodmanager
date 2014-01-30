@@ -3,7 +3,6 @@
  *
  */
 
-var _ = require('lodash-node/underscore');
 var Category = require('../modules/Category');
 var CategoryRepo = require('../modules/CategoryRepo');
 
@@ -28,6 +27,18 @@ function getCategories(req, res) {
             return;
         }
         res.json(result); 
+    });
+};
+
+// GET /api/categories/name/:name
+function getCategoriesByName(req, res) {
+    repo = new CategoryRepo();
+    repo.getByName(req.param('name'), function(result) {
+        if (result.errorCode) {
+            res.send(result.errorCode, result.errorText);
+            return;
+        }
+        res.json(result);
     });
 };
 
@@ -69,6 +80,7 @@ function addCategory(req, res) {
 
 exports.createRoutes = function(app) {
     app.get('/api/categories', getCategories);
+    app.get('/api/categories/name/:name', getCategoriesByName);
     app.put('/api/category', addCategory);
     app.get('/api/category/:id', getCategory);
     app.delete('/api/category/:id', deleteCategory);
