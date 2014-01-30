@@ -11,12 +11,15 @@
     "less-middleware": "*",
     "nconf": "~0.6.9",
     "azure": "~0.8.0",
-    "lodash-node": "~2.4.1"
+    "lodash-node": "~2.4.1",
+    "moment": "~2.5.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.2"
+    "grunt-contrib-uglify": "~0.2.2",
+    "mocha": "~1.17.1",
+    "should": "~3.1.2"
   }
 }
