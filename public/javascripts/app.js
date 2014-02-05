@@ -9,7 +9,11 @@ foodManagerApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/views/CategoryList.html',
-            controller: 'foodManagerApp.indexController'
+            controller: 'indexCtrl'
+        })
+        .when('/plan', {
+            templateUrl: '/views/FoodPlans.html',
+            controller: 'planCtrl'
         });
     }
 );

@@ -1,9 +1,9 @@
 extends layout
 
 block content
-    div#mainContent(ng-controller='foodManager.indexController')
-        ng-view
+    div#mainContent
+        div(ng-view)
 
 block scripts
-    script(src='/javascripts/controllers/foodManager.controllers.js')
     script(src='/javascripts/app.js')
+    script(src='/javascripts/controllers/foodManagerApp.controllers.js')

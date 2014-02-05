@@ -4,7 +4,7 @@
  */
 
 var should = require('should'),
-    Category = require('../modules/Category');
+    Category = require('../../modules/entities/Category');
 
 describe('Category', function() {
     describe('when newed up correctly', function() {
