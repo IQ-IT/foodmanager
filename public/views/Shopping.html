@@ -1,0 +1,19 @@
+<!-- Shopping view -->
+
+<div id="shoppingView">
+    <h1>{{header}}</h1>
+
+    <div class="panel panel-primary" ng-repeat="list in shoppingLists">
+        <div class="panel-heading">{{list.name}}</div>
+        <table class="table">
+            <tr ng-repeat="item in list.items" ng-class="{success: item.done}" ng-click="toggleItem(item)">
+                <td class="icon">
+                    <span class="glyphicon" ng-class="{'glyphicon-minus-sign': !(item.done), 'glyphicon-ok-sign': item.done}"></span>
+                </td>
+                <td>
+                    {{item.text}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

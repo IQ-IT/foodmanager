@@ -14,6 +14,10 @@ foodManagerApp.config(function ($routeProvider) {
         .when('/plan', {
             templateUrl: '/views/FoodPlans.html',
             controller: 'planCtrl'
+        })
+        .when('/shop', {
+            templateUrl: '/views/Shopping.html',
+            controller: 'shopCtrl'
         });
     }
 );

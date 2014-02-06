@@ -19,6 +19,15 @@
     }]);
 
     foodManagerApp.controller('planCtrl', ['$scope', function ($scope) {
-        $scope.header = 'Here\'s your foodplans';
+        $scope.header = 'Her er din madplan';
+    }]);
+
+    foodManagerApp.controller('shopCtrl', ['$scope', 'groceriesSvc', function ($scope, groceriesSvc) {
+        console.log(groceriesSvc.shoppingLists);
+        $scope.header = 'Indkøbsliste';
+        $scope.shoppingLists = groceriesSvc.shoppingLists;
+        $scope.toggleItem = function(item) {
+            item.done = !(item.done);
+        }
     }])
 })();
