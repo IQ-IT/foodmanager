@@ -26,8 +26,19 @@
         console.log(groceriesSvc.shoppingLists);
         $scope.header = 'Indkøbsliste';
         $scope.shoppingLists = groceriesSvc.shoppingLists;
+        $scope.addTxt = '';
+
         $scope.toggleItem = function(item) {
             item.done = !(item.done);
+        }
+
+        $scope.addItem = function() {
+            if ($scope.addTxt) {
+                groceriesSvc.add($scope.addTxt);
+                $scope.shoppingLists = groceriesSvc.shoppingLists;
+                $scope.addTxt = '';
+                $("#addTxt").focus();
+            }
         }
     }])
 })();

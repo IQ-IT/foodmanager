@@ -1,10 +1,17 @@
 <!-- Shopping view -->
 
-<div id="shoppingView">
+<div id="shoppingView" class="row">
     <h1>{{header}}</h1>
 
+    <div class="input-group addItem">
+        <input id="addTxt" class="form-control" type="text" placeholder="Tilføj indkøb" ng-model="addTxt" />
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" ng-click="addItem()"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Tilføj</button>
+        </span>
+    </div>
+
     <div class="panel panel-primary" ng-repeat="list in shoppingLists">
-        <div class="panel-heading">{{list.name}}</div>
+        <div class="panel-heading">{{list.name}}&nbsp;<small>({{list.id}})</small></div>
         <table class="table">
             <tr ng-repeat="item in list.items" ng-class="{success: item.done}" ng-click="toggleItem(item)">
                 <td class="icon">

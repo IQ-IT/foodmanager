@@ -13,23 +13,26 @@
             complete,
             purge;
 
+        // methods
+        add = function(itemString) {
+            var strings = itemString.split(':');
+            var list = _.find(shoppingLists, function(l) {
+                return l.id === strings[0].trim().toLowerCase();
+            });
+            list.items.push({text: strings[1].trim(), done: false});
+        }
+
+        // setup
         shoppingLists = [
             {
                 id: 'ko',
                 name: 'Kolonial',
-                items: [
-                    {text: '2kg mel', done: false},
-                    {text: 'Mandler', done: true},
-                    {text: 'Groft salt', done: false}
-                ]
+                items: []
             },
             {
                 id: 'me',
                 name: 'Mejeri',
-                items: [
-                    {text: '2l letmælk', done: false},
-                    {text: 'Smør', done: false}
-                ]
+                items: []
             }
         ];
 
