@@ -10,7 +10,7 @@
         </span>
     </div>
 
-    <div class="panel panel-primary" ng-repeat="list in shoppingLists">
+    <div class="panel panel-primary" ng-repeat="list in shoppingLists" ng-class="{empty: list.items.length == 0}">
         <div class="panel-heading">{{list.name}}&nbsp;<small>({{list.id}})</small></div>
         <table class="table">
             <tr ng-repeat="item in list.items" ng-class="{success: item.done}" ng-click="toggleItem(item)">
