@@ -11,13 +11,13 @@ foodManagerApp.config(function ($routeProvider) {
             templateUrl: '/views/FoodPlans.html',
             controller: 'planCtrl'
         })
-        .when('/categories', {
-            templateUrl: '/views/CategoryList.html',
-            controller: 'categoryCtrl'
-        })
         .when('/shop', {
             templateUrl: '/views/Shopping.html',
             controller: 'shopCtrl'
+        })
+        .when('/categories', {
+            templateUrl: '/views/CategoryList.html',
+            controller: 'categoryCtrl'
         });
     }
 );
