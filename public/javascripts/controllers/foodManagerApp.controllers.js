@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    foodManagerApp.controller('indexCtrl', ['$scope', '$http', function ($scope, $http) {
-        $scope.header = 'Welcome to the foodfight';
+    foodManagerApp.controller('categoryCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.header = 'Kategorier';
         $scope.categories = [];
         $http({method:'GET', url:'/api/categories'})
             .success(function(data) {

@@ -1,24 +1,30 @@
 <!-- Categorylist view -->
 
-<div id="CategoryList">
-<h1>{{header}}</h1>
+<div id="categoryView">
+    <h1>{{header}}</h1>
 
-<form class="span12">
-    <input name="addItem" ng-model="addItemText" />
-    <button class="btn button-sm button-success" ng-click="addItem()">Add</button>
+    <div class="input-group addItem">
+        <input id="addItemTxt" class="form-control" type="text" placeholder="Tilføj kategori" ng-model="addItemTxt" />
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" ng-click="addItem()"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Tilføj</button>
+        </span>
+    </div>
 
-    <table class="liItems span12" ng-hide="">
-        <tbody>
-            <tr ng-repeat="category in categories">
-                <td class="item">{{category.name}}</td>
-                <td>
-                    <button class="btn btn-sm btn-danger" ng-click="removeItem(category)">
-                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-</form>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Kategorier</div>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="category in categories">
+                    <td class="item">{{category.name}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" ng-click="removeItem(category)">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 </div>

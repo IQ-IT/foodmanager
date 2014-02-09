@@ -8,12 +8,12 @@ var foodManagerApp = angular.module('foodManagerApp', ['ngRoute']);
 foodManagerApp.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: '/views/CategoryList.html',
-            controller: 'indexCtrl'
-        })
-        .when('/plan', {
             templateUrl: '/views/FoodPlans.html',
             controller: 'planCtrl'
+        })
+        .when('/categories', {
+            templateUrl: '/views/CategoryList.html',
+            controller: 'categoryCtrl'
         })
         .when('/shop', {
             templateUrl: '/views/Shopping.html',
