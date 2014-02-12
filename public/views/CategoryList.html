@@ -16,10 +16,15 @@
             <tbody>
                 <tr ng-repeat="category in categories">
                     <td class="item">{{category.name}}</td>
-                    <td>
-                        <button class="btn btn-sm btn-danger" ng-click="removeItem(category)">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Delete
-                        </button>
+                    <td class="icon">
+                        <div class="btn-group">
+                            <button class="btn btn-info">
+                                <span class="glyphicon glyphicon-pencil" ng-click="editItem(category)"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="removeItem(category)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
