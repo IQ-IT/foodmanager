@@ -1,13 +1,12 @@
 (function() {
     'use strict';
 
-    foodManagerApp.controller('categoryCtrl', ['$scope', '$http', function ($scope, $http) {
+    foodManagerApp.controller('categoryCtrl', ['$scope', 'categorySvc', function ($scope, categorySvc) {
         $scope.header = 'Kategorier';
         $scope.categories = [];
-        $http({method:'GET', url:'/api/categories'})
-            .success(function(data) {
-                $scope.categories = data;
-            });
+        categorySvc.getCategories().then(function(cats) {
+            $scope.categories = cats;
+        });
 
         $scope.removeItem = function(item) {
             $scope.categories.splice($scope.categories.indexOf(item), 1);
