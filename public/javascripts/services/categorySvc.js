@@ -38,12 +38,16 @@
 
         };
 
-        remove = function(data) {
-
+        remove = function(category) {
+            var deferred = $q.defer();
+            _categories.splice(_categories.indexOf(category), 1);
+            deferred.resolve(_categories);
+            return deferred.promise;
         };
 
         return {
-            getCategories: getCategories
+            getCategories: getCategories,
+            remove: remove
         };
     })
 })();

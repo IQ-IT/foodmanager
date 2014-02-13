@@ -7,11 +7,14 @@
         $scope.categories = [];
         categorySvc.getCategories().then(function(cats) {
             $scope.categories = cats;
-            $scope.alerts.push({type: 'success', msg: 'Kategorier hentet'});
         }); // getCategories is a $q.promise
 
         $scope.removeItem = function(item) {
-            $scope.categories.splice($scope.categories.indexOf(item), 1);
+            categorySvc.remove(item)
+                .then(function(cats) {
+                    $scope.categorie = cats;
+                    $scope.alerts.push({type: 'success', msg: 'Kategorien blev slettet'});
+                });
         };
 
         $scope.addItem = function() {
