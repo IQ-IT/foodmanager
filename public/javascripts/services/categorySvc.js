@@ -30,7 +30,7 @@
             return deferred.promise;
         }
 
-        add = function(data) {
+        add = function(category) {
             
         };
 

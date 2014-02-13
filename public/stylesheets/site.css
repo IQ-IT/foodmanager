@@ -1,3 +1,11 @@
+.revealAnimation.ng-enter {
+  -webkit-transition: ls linear all;
+  transition: ls linear all;
+  opacity: 0;
+}
+.revealAnimation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
 #mainContent {
   padding: 60px 0;
 }

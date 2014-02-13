@@ -3,7 +3,7 @@
  *
  */
 
-var foodManagerApp = angular.module('foodManagerApp', ['ngRoute', 'ui.bootstrap']);
+var foodManagerApp = angular.module('foodManagerApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 foodManagerApp.config(function ($routeProvider) {
     $routeProvider

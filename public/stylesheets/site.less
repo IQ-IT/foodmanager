@@ -1,3 +1,21 @@
+// mixins
+.animOpacity() {
+    -webkit-transition: ls linear all;
+    transition: ls linear all;
+}
+
+// common
+.revealAnimation.ng-enter {
+    .animOpacity();
+    opacity: 0;
+
+    &.ng-enter-active {
+        opacity: 1;
+    }
+}
+
+
+// styling
 #mainContent {
     padding: 60px 0;
 }
