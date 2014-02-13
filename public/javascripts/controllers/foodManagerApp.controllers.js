@@ -12,13 +12,23 @@
         $scope.removeItem = function(item) {
             categorySvc.remove(item)
                 .then(function(cats) {
-                    $scope.categorie = cats;
-                    $scope.alerts.push({type: 'success', msg: 'Kategorien blev slettet'});
+                    $scope.categories = cats;
                 });
         };
 
         $scope.addItem = function() {
-            $scope.categories.push({id: 't', name: $scope.addItemTxt});
+            $scope.alerts = [];
+            var newCatArr = $scope.addItemTxt.split(':');
+            categorySvc.add({id: newCatArr[0], name: newCatArr[1].trim()})
+                .then(
+                    function(cats) {
+                        $scope.addItemTxt = '';
+                        $scope.categories = cats;
+                    },
+                    function(reason) {
+                        $scope.alerts.push({type:'danger', msg:reason});
+                    }
+                ); // add is a $q.promise
         };
 
         $scope.closeAlert = function(index) {

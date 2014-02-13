@@ -3,10 +3,14 @@
  *
  */
 
- function Category(id, name) {
-    if (!id || !name) throw new Error('Invalid parameters');
-    if (id) this.id = id;
-    if (name) this.name = name;
- }
+function Category(id, name) {
+    this.id = id || '';
+    this.name = name || '';
+}
 
- module.exports = Category;
+Category.prototype.isValid = function() {
+    var self = this;
+    return self.id && self.name;
+}
+
+module.exports = Category;

@@ -3,7 +3,7 @@
  *
  */
 
-var Category = require('../modules/Category');
+var Category = require('../modules/entities/Category');
 var CategoryRepo = require('../modules/CategoryRepo');
 
  // GET /api/categories
@@ -69,6 +69,7 @@ function deleteCategory(req, res) {
 
 // PUT /api/categories/add
 function addCategory(req, res) {
+    console.log(req.param('id'));
     var category = new Category(req.param('id'), req.param('name'));
     if (!category.isValid()) res.send(400, 'Invalid category data');
     repo = new CategoryRepo();
