@@ -3,10 +3,12 @@
 
     foodManagerApp.controller('categoryCtrl', ['$scope', 'categorySvc', function ($scope, categorySvc) {
         $scope.header = 'Kategorier';
+        $scope.alerts = [];
         $scope.categories = [];
         categorySvc.getCategories().then(function(cats) {
             $scope.categories = cats;
-        });
+            $scope.alerts.push({type: 'success', msg: 'Kategorier hentet'});
+        }); // getCategories is a $q.promise
 
         $scope.removeItem = function(item) {
             $scope.categories.splice($scope.categories.indexOf(item), 1);
@@ -14,6 +16,10 @@
 
         $scope.addItem = function() {
             $scope.categories.push({id: 't', name: $scope.addItemTxt});
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
         };
     }]);
 

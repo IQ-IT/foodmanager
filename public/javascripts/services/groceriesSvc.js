@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    foodManagerApp.factory('groceriesSvc', function() {
+    foodManagerApp.factory('groceriesSvc', function($http) {
         // vars
         var shoppingLists,
             add,

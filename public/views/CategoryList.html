@@ -3,6 +3,8 @@
 <div id="categoryView">
     <h1>{{header}}</h1>
 
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert(index)">{{alert.msg}}</alert>
+
     <div class="input-group addItem">
         <input id="addItemTxt" class="form-control" type="text" placeholder="Tilføj kategori" ng-model="addItemTxt" />
         <span class="input-group-btn">
