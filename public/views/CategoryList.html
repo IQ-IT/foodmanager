@@ -5,12 +5,13 @@
 
     <alert class="revealAnimation" ng-repeat="alert in alerts" type="alert.type" close="closeAlert(index)">{{alert.msg}}</alert>
 
-    <div class="input-group addItem">
-        <input id="addItemTxt" class="form-control" type="text" placeholder="Tilføj kategori" ng-model="addItemTxt" />
+    <form name="addFrm" class="input-group addItem" ng-class="{'has-error': addFrm.addTxt.$invalid, 'has-success': addFrm.addTxt.$valid}">
+        <input class="form-control" name="addTxt" type="text" placeholder="Tilføj kategori" 
+               ng-model="addItemTxt" ng-pattern="/[a-zæøå]{2}:.*/" />
         <span class="input-group-btn">
             <button class="btn btn-success" type="button" ng-click="addItem()"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Tilføj</button>
         </span>
-    </div>
+    </form>
 
     <div class="panel panel-primary">
         <div class="panel-heading">Kategorier</div>
