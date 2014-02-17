@@ -6,41 +6,51 @@
 (function() {
     'use strict';
 
-    foodManagerApp.factory('groceriesSvc', function($http) {
+    foodManagerApp.factory('groceriesSvc', ['$http', '$q', 'categorySvc', function($http, $q, categorySvc) {
         // vars
-        var shoppingLists,
+        var _shoppingLists,
             add,
-            complete,
-            purge;
+            getGroceries;
 
         // methods
         add = function(itemString) {
+            var deferred = $q.defer();
+
             var strings = itemString.split(':');
-            var list = _.find(shoppingLists, function(l) {
+            var list = _.find(_shoppingLists, function(l) {
                 return l.id === strings[0].trim().toLowerCase();
             });
             list.items.push({text: strings[1].trim(), done: false});
+            deferred.resolve(_shoppingLists);
+
+            return deferred.promise;
         }
 
-        // setup
-        shoppingLists = [
-            {
-                id: 'ko',
-                name: 'Kolonial',
-                items: []
-            },
-            {
-                id: 'me',
-                name: 'Mejeri',
-                items: []
+        getGroceries = function() {
+            var deferred = $q.defer();
+
+            if (_shoppingLists) {
+                deferred.resolve(_shoppingLists);
+            } else {
+                categorySvc.getCategories()
+                    .then(function(cats) {
+                        _shoppingLists = _.map(cats, function(cat) {
+                            return {
+                                id: cat.id,
+                                name: cat.name,
+                                items: []
+                            }
+                        });
+                    });
             }
-        ];
+
+            return deferred.promise;
+        }
 
         return {
-            shoppingLists: shoppingLists,
-            add: add,
-            complete: complete
+            getGroceries: getGroceries,
+            add: add
         }
-    });
+    }]);
 })();
 
