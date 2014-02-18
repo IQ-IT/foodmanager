@@ -9,8 +9,14 @@
     foodManagerApp.factory('groceriesSvc', ['$http', '$q', 'categorySvc', function($http, $q, categorySvc) {
         // vars
         var _shoppingLists,
+            _updateList,
             add,
             getGroceries;
+
+        // private methods
+        _updateList = function(list) {
+            
+        }
 
         // methods
         add = function(itemString) {

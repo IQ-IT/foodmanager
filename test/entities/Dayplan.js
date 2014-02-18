@@ -5,10 +5,9 @@
 
 var should = require('should'),
     Category = require('../../modules/entities/Category'),
-    Dayplan = require('../../modules/entities/Dayplan'),
-    GroceryItem = require('../../modules/entities/GroceryItem');
+    Dayplan = require('../../modules/entities/Dayplan');
 
-describe('Dayplan', function() {
+describe.skip('Dayplan', function() {
     describe('When newed up correctly', function() {
         var dayplan = null;
 

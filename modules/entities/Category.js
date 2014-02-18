@@ -4,13 +4,17 @@
  */
 
 function Category(id, name) {
+    if (!id || !name) {
+        throw Error('Invalid arguments')
+    }
     this.id = id || '';
     this.name = name || '';
+    this.groceries = [];
 }
 
-Category.prototype.isValid = function() {
+Category.prototype.addGroceryItem = function(item) {
     var self = this;
-    return self.id && self.name;
+    self.groceries.push(item);
 }
 
 module.exports = Category;

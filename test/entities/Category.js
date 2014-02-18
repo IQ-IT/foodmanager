@@ -12,6 +12,7 @@ describe('Category', function() {
         
         before(function() {
             category = new Category('newid', 'newname');
+            console.log(category);
         });
 
         it('should have a property called id with value \'newid\'', function() {
@@ -20,6 +21,16 @@ describe('Category', function() {
 
         it('should have a property called name with value \'newname\'', function() {
             category.should.have.property('name', 'newname');
+        });
+
+        it('should have a property called groceries which is an empty array', function() {
+            category.should.have.property('groceries');
+            category.groceries.should.be.an.Array
+                .and.have.lengthOf(0);
+        });
+
+        it('should have a method for adding groceries', function() {
+            category.addGroceryItem.should.be.a.Function;
         });
     });
 
@@ -44,5 +55,18 @@ describe('Category', function() {
                 var c = new Category('newid', '');
             }).should.throw(/^Invalid/);
         });
-    })
+    });
+
+    describe('when adding groceries', function() {
+        var category;
+
+        beforeEach(function() {
+            category = new Category('te', 'Test');
+        });
+
+        it('should add an item to the groceries array', function() {
+            category.addGroceryItem('2kg test');
+            category.groceries.should.have.lengthOf(1);
+        });
+    });
 });
