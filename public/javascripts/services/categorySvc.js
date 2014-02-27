@@ -9,10 +9,28 @@
     foodManagerApp.factory('categorySvc', function ($http, $q) {
         // vars 
         var _categories,
+            _updateGroceries,
             getCategories,
             add,
+            addGrocery,
             update,
-            remove;
+            updateGrocery,
+            remove,
+            removeGrocery;
+
+        // private methods
+        _updateGroceries = function(categoryId) {
+            var deferred = $q.defer();
+
+            var post = {
+                method: 'POST',
+                url: '/api/category/' + categoryId,
+                data: {} // TODO: Implement here
+            }
+            $http()
+
+            return deferred.promise;
+        };
 
         // methods
         getCategories = function() {
@@ -23,6 +41,7 @@
             } else {
             $http({method:'GET', url:'/api/categories'})
                 .success(function(data) {
+                    console.log(data);
                     _categories = data;
                     deferred.resolve(_categories);
                 });
@@ -48,8 +67,13 @@
             return deferred.promise;
         };
 
-        update = function(data) {
+        addGrocery = function(groceryTxt) {
+            // TODO: find category by id, push grocerytxt to groceries array
+        };
 
+        update = function(data) {
+            // TODO: Implement
+            return;
         };
 
         remove = function(category) {
@@ -61,6 +85,8 @@
                 });
             return deferred.promise;
         };
+
+
 
         return {
             getCategories: getCategories,

@@ -7,7 +7,7 @@ var azure = require('azure');
 var nconf = require('nconf');
 var _ = require('lodash-node/underscore');
 var AzureTableStorage = require('./AzureTableStorage');
-var Category = require('./Category');
+var Category = require('./entities/Category');
 
 
 function CategoryRepo() {
@@ -20,7 +20,12 @@ function CategoryRepo() {
 CategoryRepo.prototype = {
     add: function(category, callback) {
         var self = this;
-        self.storage.add(category, callback);
+        var storeThis = {
+            id: category.id,
+            name: category.name,
+            storedCat: category.getStorageCategory()
+        }
+        self.storage.add(storeThis, callback);
     },
     get: function(id, callback) {
         var self = this;
@@ -33,6 +38,8 @@ CategoryRepo.prototype = {
                 });
                 return;
             }
+            var cat = new Category(result.id, result.name);
+            cat.parseStorageCategory(result.storedCat)
             callback(new Category(result.id, result.name));
         });
     },
@@ -56,7 +63,9 @@ CategoryRepo.prototype = {
                 return;
             }
             var cats = _.map(result, function(c) {
-                return new Category(c.id, c.name);
+                var cat = new Category(c.id, c.name);
+                cat.parseStorageCategory(c.storedCat);
+                return cat;
             });
             callback(cats);
         });
@@ -80,7 +89,9 @@ CategoryRepo.prototype = {
                 return;
             }
             var cats = _.map(items, function(c) {
-                return new Category(c.id, c.name);
+                var cat = new Category(c.id, c.name);
+                cat.parseStorageCategory(c.storedCat);
+                return cat;
             })
             callback(cats);
         });

@@ -47,7 +47,6 @@ function getCategory(req, res) {
     repo = new CategoryRepo();
     repo.get(req.param('id'), function(result) {
         if (result.errorCode) {
-            console.log(result);
             res.send(result.errorCode, result.errorText);
             return;
         }
@@ -67,22 +66,34 @@ function deleteCategory(req, res) {
     });
 }
 
-// PUT /api/categories/add
+// POST /api/category/:id
+function updateCategory(req, res) {
+    // recreate category from post params
+    // updated category by passing it to categoryrepo
+    res.send(501, 'Not implemented yet');
+    // TODO: Implement above
+};
+
+// PUT /api/category
 function addCategory(req, res) {
-    console.log(req.param('id'));
-    var category = new Category(req.param('id'), req.param('name'));
-    if (!category.isValid()) res.send(400, 'Invalid category data');
-    repo = new CategoryRepo();
-    repo.add(category, function(error) {
-        if (error) res.send(500, 'Error creating category');
-        res.json(category);
-    });
+    try {
+        var category = new Category(req.param('id'), req.param('name'));
+        repo = new CategoryRepo();
+        repo.add(category, function(error) {
+            if (error) res.send(500, 'Error creating category');
+            res.json(category);
+        });
+    } 
+    catch(e) {
+        res.send(400, 'Invalid category data');
+    }
 };
 
 exports.createRoutes = function(app) {
     app.get('/api/categories', getCategories);
     app.get('/api/categories/name/:name', getCategoriesByName);
     app.put('/api/category', addCategory);
+    app.post('/api/category/:id', updateCategory);
     app.get('/api/category/:id', getCategory);
     app.delete('/api/category/:id', deleteCategory);
 }

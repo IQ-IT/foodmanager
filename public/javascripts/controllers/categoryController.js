@@ -1,3 +1,8 @@
+/*
+ * Category controller
+ *
+ */
+
 (function() {
     'use strict';
 
@@ -35,36 +40,4 @@
             $scope.alerts.splice(index, 1);
         };
     }]);
-
-    foodManagerApp.controller('planCtrl', ['$scope', function ($scope) {
-        $scope.header = 'Her er din madplan';
-    }]);
-
-    foodManagerApp.controller('shopCtrl', ['$scope', 'groceriesSvc', function ($scope, groceriesSvc) {
-        console.log(groceriesSvc.shoppingLists);
-        $scope.header = 'Indkøbsliste';
-        $scope.shoppingLists = [];
-        $scope.addTxt = '';
-
-        // setup
-        groceriesSvc.getGroceries()
-            .then(function(lists) {
-                $scope.shoppingLists = lists;
-            });
-
-        $scope.toggleItem = function(item) {
-            item.done = !(item.done);
-        }
-
-        $scope.addItem = function() {
-            if ($scope.addTxt) {
-                groceriesSvc.add($scope.addTxt)
-                    .then(function(lists){
-                        $scope.shoppingLists = lists;
-                        $scope.addTxt = '';
-                        $("#addTxt").focus();
-                    });
-            }
-        }
-    }])
 })();

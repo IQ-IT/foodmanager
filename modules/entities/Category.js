@@ -3,6 +3,9 @@
  *
  */
 
+var _ = require('lodash-node'),
+    GroceryItem = require('./GroceryItem');
+
 function Category(id, name) {
     if (!id || !name) {
         throw Error('Invalid arguments')
@@ -10,11 +13,24 @@ function Category(id, name) {
     this.id = id || '';
     this.name = name || '';
     this.groceries = [];
+};
+
+Category.prototype.addGroceryItem = function(itemTxt) {
+    var self = this;
+    if (itemTxt === '') throw Error('Invalid arguments');
+    if (typeof(itemTxt) !== 'string') throw Error('Invalid arguments');
+    self.groceries.push(new GroceryItem(itemTxt));
+};
+
+Category.prototype.getStorageCategory = function() {
+    var self = this;
+    return JSON.stringify(self);
 }
 
-Category.prototype.addGroceryItem = function(item) {
+Category.prototype.parseStorageCategory = function(storageCategory) {
     var self = this;
-    self.groceries.push(item);
-}
+    var parsedCat = JSON.parse(storageCategory);
+    _.assign(self, parsedCat);
+};
 
 module.exports = Category;

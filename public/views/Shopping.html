@@ -13,7 +13,7 @@
     <div class="panel panel-primary" ng-repeat="list in shoppingLists" ng-class="{empty: list.items.length == 0}">
         <div class="panel-heading">{{list.name}}&nbsp;<small>({{list.id}})</small></div>
         <table class="table">
-            <tr ng-repeat="item in list.items" ng-class="{success: item.done}" ng-click="toggleItem(item)">
+            <tr ng-repeat="item in list.groceries" ng-class="{success: item.done}" ng-click="toggleItem(item)">
                 <td class="icon">
                     <span class="glyphicon" ng-class="{'glyphicon-minus-sign': !(item.done), 'glyphicon-ok-sign': item.done}"></span>
                 </td>
