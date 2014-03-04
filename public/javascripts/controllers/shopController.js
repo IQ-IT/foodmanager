@@ -20,9 +20,9 @@
             item.done = !(item.done);
         }
 
-        $scope.addItem = function() {
+        $scope.addGroceryItem = function() {
             if ($scope.addTxt) {
-                groceriesSvc.add($scope.addTxt)
+                categorySvc.addGroceryItem($scope.addTxt)
                     .then(function(lists){
                         $scope.shoppingLists = lists;
                         $scope.addTxt = '';

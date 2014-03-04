@@ -10,13 +10,14 @@
         // vars 
         var _categories,
             _updateGroceries,
+            getCategory,
             getCategories,
             add,
-            addGrocery,
+            addGroceryItem,
             update,
-            updateGrocery,
+            updateGroceryItem,
             remove,
-            removeGrocery;
+            removeGroceryItem;
 
         // private methods
         _updateGroceries = function(categoryId) {
@@ -32,7 +33,32 @@
             return deferred.promise;
         };
 
+
+
         // methods
+        getCategory = function(id) {
+            var deferred = $q.defer();
+
+            if (_categories) {
+                var cat = _.find(_categories, {id: id.toLowerCase()});
+                if (cat) {
+                     deferred.resolve(cat);
+                } else {
+                    deferred.reject('404');
+                }
+            } else {
+                $http({method:'GET', url:'/api/categories'})
+                    .success(function(data) {
+                        _categories = data;
+                        deferred.resolve(getCategory(id));
+                    })
+                    .error(function(data, status) {
+                        deferred.reject(status);
+                    });
+            }
+            return deferred.promise;
+        }
+
         getCategories = function() {
             var deferred = $q.defer();
 
@@ -41,7 +67,6 @@
             } else {
             $http({method:'GET', url:'/api/categories'})
                 .success(function(data) {
-                    console.log(data);
                     _categories = data;
                     deferred.resolve(_categories);
                 });
@@ -67,8 +92,22 @@
             return deferred.promise;
         };
 
-        addGrocery = function(groceryTxt) {
-            // TODO: find category by id, push grocerytxt to groceries array
+        addGroceryItem = function(groceryTxt) {
+            // TODO: find category by id, push grocerytxt to groceries array, then return lists
+            var deferred = $q.defer(),
+                itemData = groceryTxt.split(':');
+
+            getCategory(itemData[0])
+                .then(
+                    function(category) {
+                        category.groceries.push({text: itemData[1], done: false});
+                        deferred.resolve(_categories);
+                    },
+                    function(error) {
+                        console.log(error);
+                    }
+                );
+            return deferred.promise;
         };
 
         update = function(data) {
@@ -91,7 +130,8 @@
         return {
             getCategories: getCategories,
             add: add,
-            remove: remove
+            remove: remove,
+            addGroceryItem: addGroceryItem
         };
     })
 })();
