@@ -9,6 +9,7 @@
     foodManagerApp.factory('categorySvc', function ($http, $q) {
         // vars 
         var _categories,
+            _findCategoryById,
             _updateGroceries,
             getCategory,
             getCategories,
@@ -20,27 +21,38 @@
             removeGroceryItem;
 
         // private methods
-        _updateGroceries = function(categoryId) {
-            var deferred = $q.defer();
-
-            var post = {
-                method: 'POST',
-                url: '/api/category/' + categoryId,
-                data: {} // TODO: Implement here
-            }
-            $http()
-
-            return deferred.promise;
+        _findCategoryById = function(id) {
+            if (!_categories) return null;
+            return _.find(_categories, {id: id.toLowerCase()});
         };
 
-
+        _updateGroceries = function(categoryId) {
+            
+            getCategory(categoryId).then(
+                function(category){
+                    var post = {
+                        method: 'POST',
+                        url: '/api/category/' + category.id,
+                        data: {groceries: category.groceries } // TODO: Implement here
+                    }
+                    $http(post)
+                        .success(function() {
+                            console.log(updated);
+                        });
+                },
+                function(error) {
+                    console.log(error);
+                }
+            )
+        };
 
         // methods
         getCategory = function(id) {
-            var deferred = $q.defer();
+            var cat,
+                deferred = $q.defer();
 
             if (_categories) {
-                var cat = _.find(_categories, {id: id.toLowerCase()});
+                cat = _findCategoryById(id);
                 if (cat) {
                      deferred.resolve(cat);
                 } else {
@@ -50,7 +62,12 @@
                 $http({method:'GET', url:'/api/categories'})
                     .success(function(data) {
                         _categories = data;
-                        deferred.resolve(getCategory(id));
+                        cat = _findCategoryById(id);
+                        if (cat) {
+                            deferred.resolve(cat);
+                        } else {
+                            deferred.reject('404');
+                        }
                     })
                     .error(function(data, status) {
                         deferred.reject(status);
@@ -101,6 +118,7 @@
                 .then(
                     function(category) {
                         category.groceries.push({text: itemData[1], done: false});
+                        _updateGroceries(category.id);
                         deferred.resolve(_categories);
                     },
                     function(error) {
