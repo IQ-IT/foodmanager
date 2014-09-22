@@ -6,7 +6,7 @@
 var Category = require('../modules/entities/Category');
 var CategoryRepo = require('../modules/CategoryRepo');
 
- // GET /api/categories
+// GET /api/categories
 function getCategories(req, res) {
     repo = new CategoryRepo();
     // test for query
@@ -69,7 +69,8 @@ function deleteCategory(req, res) {
 // POST /api/category/:id
 function updateCategory(req, res) {
     // recreate category from post params
-    // updated category by passing it to categoryrepo
+    // update category by passing it to categoryrepo
+    var repo = new CategoryRepo();
     res.send(501, 'Not implemented yet');
     // TODO: Implement above
 };

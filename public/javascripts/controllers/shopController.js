@@ -26,7 +26,7 @@
                     .then(function(lists){
                         $scope.shoppingLists = lists;
                         $scope.addTxt = '';
-                        $("#addTxt").focus();
+                        // TODO: $("#addTxt").focus();
                     });
             }
         }
