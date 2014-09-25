@@ -22,6 +22,13 @@ Category.prototype.addGroceryItem = function(itemTxt) {
     self.groceries.push(new GroceryItem(itemTxt));
 };
 
+Category.prototype.purgeDoneGroceryItems = function() {
+    var self = this;
+    self.groceries = _.filter(self.groceries, function(g) {
+        return !g.done;
+    });
+}
+
 Category.prototype.getStorageCategory = function() {
     var self = this;
     return JSON.stringify(self);

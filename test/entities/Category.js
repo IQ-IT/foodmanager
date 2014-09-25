@@ -117,4 +117,22 @@ describe('Category', function() {
             }).should.throw(/^Invalid/);
         });
     });
+
+    describe('when purging groceries', function() {
+        var category;
+
+        beforeEach(function() {
+            category = new Category('te', 'Test');
+            category.addGroceryItem('2kg test');
+            category.groceries[0].toggle();
+            category.addGroceryItem('3kg test');
+        });
+
+        it('should remove all items that are done', function() {
+            category.purgeDoneGroceryItems();
+            category.groceries.should.have.lengthOf(1);
+            category.groceries[0].done.should.be.false;
+            category.groceries[0].text.should.equal('3kg test');
+        });
+    });
 });

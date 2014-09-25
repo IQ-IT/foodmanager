@@ -63,10 +63,10 @@ CategoryRepo.prototype = {
                 return;
             }
             var cats = _.map(result, function(c) {
-                var cat = new Category(c.id, c.name);
-                cat.parseStorageCategory(c.storedCat);
-                return cat;
-            });
+                    var cat = new Category(c.id, c.name);
+                    cat.parseStorageCategory(c.storedCat);
+                    return cat;
+                });
             callback(cats);
         });
     },

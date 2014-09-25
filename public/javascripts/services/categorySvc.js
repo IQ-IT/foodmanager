@@ -1,4 +1,4 @@
-/*
+/* 
  * Category service
  *
  */
@@ -27,7 +27,6 @@
         };
 
         _updateGroceries = function(categoryId) {
-            
             getCategory(categoryId).then(
                 function(category){
                     var post = {
@@ -82,11 +81,11 @@
             if (_categories) {
                 deferred.resolve(_categories);
             } else {
-            $http({method:'GET', url:'/api/categories'})
-                .success(function(data) {
-                    _categories = data;
-                    deferred.resolve(_categories);
-                });
+                $http({method:'GET', url:'/api/categories'})
+                    .success(function(data) {
+                        _categories = data;
+                        deferred.resolve(_categories);
+                    });
             }
             return deferred.promise;
         }
