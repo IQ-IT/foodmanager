@@ -40,11 +40,12 @@ CategoryRepo.prototype = {
             }
             var cat = new Category(result.id, result.name);
             cat.parseStorageCategory(result.storedCat)
-            callback(new Category(result.id, result.name));
+            callback(cat));
         });
     },
     update: function(category, callback) {
         var self = this;
+        //TODO: Implement updating of category with groceryitems
         // self.storage.update(category, callback);
     },
     delete: function(id, callback) {
@@ -100,6 +101,13 @@ CategoryRepo.prototype = {
         var self = this;
         console.log(qry);
         callback({errorCode: '204'});
+    },
+    setGroceries: function(categoryId, groceries, callback) {
+        var self = this;
+        self.get(categoryId, function(category) {
+            category.setGroceryItems(groceries);
+            // TODO implement saving of updated category here
+        });
     }
 }
 

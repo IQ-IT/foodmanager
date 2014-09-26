@@ -71,6 +71,7 @@ function updateCategory(req, res) {
     // recreate category from post params
     // update category by passing it to categoryrepo
     var repo = new CategoryRepo();
+    console.log(req.param('groceries'));
     res.send(501, 'Not implemented yet');
     // TODO: Implement above
 };
