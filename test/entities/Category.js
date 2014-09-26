@@ -123,12 +123,15 @@ describe('Category', function() {
 
         beforeEach(function() {
             category = new Category('te', 'Test');
-            category.addGroceryItem('2kg test');
-            category.groceries[0].toggle();
-            category.addGroceryItem('3kg test');
         });
 
         it('should remove all items that are done', function() {
+            category.addGroceryItem('2kg test');
+            category.groceries[0].toggle();
+            category.addGroceryItem('3kg test');
+            category.groceries.should.have.lengthOf(2);
+            category.groceries[0].done.should.be.true;
+            category.groceries[0].text.should.equal('2kg test');
             category.purgeDoneGroceryItems();
             category.groceries.should.have.lengthOf(1);
             category.groceries[0].done.should.be.false;
