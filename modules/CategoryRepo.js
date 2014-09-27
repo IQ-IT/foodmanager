@@ -3,6 +3,8 @@
  *
  */
 
+/* global console, require, module */
+
 var azure = require('azure');
 var nconf = require('nconf');
 var _ = require('lodash-node/underscore');
@@ -11,23 +13,29 @@ var Category = require('./entities/Category');
 
 
 function CategoryRepo() {
+    'use strict';
+
     this.client = azure.createTableService(nconf.get('AzureAccountName'), nconf.get('AzureAccountKey'));
     this.tableName = 'categories';
     this.partitionKey = nconf.get('ApplicationName');
     this.storage = new AzureTableStorage(this.client, this.tableName, this.partitionKey);
-};
+}
 
 CategoryRepo.prototype = {
     add: function(category, callback) {
+        'use strict';
+
         var self = this;
         var storeThis = {
             id: category.id,
             name: category.name,
             storedCat: category.getStorageCategory()
-        }
+        };
         self.storage.add(storeThis, callback);
     },
     get: function(id, callback) {
+        'use strict';
+
         var self = this;
         self.storage.get(id, function(result) {
             console.log(result);
@@ -39,20 +47,24 @@ CategoryRepo.prototype = {
                 return;
             }
             var cat = new Category(result.id, result.name);
-            cat.parseStorageCategory(result.storedCat)
-            callback(cat));
+            cat.parseStorageCategory(result.storedCat);
+            callback(cat);
         });
     },
     update: function(category, callback) {
+        'use strict';
+
         var self = this;
         //TODO: Implement updating of category with groceryitems
         // self.storage.update(category, callback);
     },
     delete: function(id, callback) {
+        'use strict';
         var self = this;
         self.storage.delete(id, callback);
     },
     getAll: function(callback) {
+        'use strict';
         var self = this;
         self.storage.getAll(function(result) {
             if (result.length === 0) {
@@ -72,6 +84,7 @@ CategoryRepo.prototype = {
         });
     },
     getByName: function(name, callback) {
+        'use strict';
         var self = this;
         var qry = azure.TableQuery
             .select()
@@ -93,11 +106,12 @@ CategoryRepo.prototype = {
                 var cat = new Category(c.id, c.name);
                 cat.parseStorageCategory(c.storedCat);
                 return cat;
-            })
+            });
             callback(cats);
         });
     },
     queryAll: function(qry, callback) {
+        'use strict';
         var self = this;
         console.log(qry);
         callback({errorCode: '204'});

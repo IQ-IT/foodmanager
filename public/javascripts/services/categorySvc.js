@@ -3,6 +3,8 @@
  *
  */
 
+/* global foodManagerApp, _, console */
+
 (function() {
     'use strict';
 
@@ -16,14 +18,10 @@
             add,
             addGroceryItem,
             update,
-            updateGroceryItem,
-            remove,
-            removeGroceryItem;
-
+            remove;
         // private methods
         _findCategoryById = function(id) {
-            if (!_categories) return null;
-            return _.find(_categories, {id: id.toLowerCase()});
+            return !_categories ? null : _.find(_categories, {id: id.toLowerCase()});
         };
 
         _updateGroceries = function(categoryId) {
@@ -33,16 +31,16 @@
                         method: 'POST',
                         url: '/api/category/' + category.id,
                         data: {groceries: category.groceries } // TODO: Implement here
-                    }
+                    };
                     $http(post)
                         .success(function() {
-                            console.log(updated);
+                            console.log('updated');
                         });
                 },
                 function(error) {
                     console.log(error);
                 }
-            )
+            );
         };
 
         // methods
@@ -68,12 +66,13 @@
                             deferred.reject('404');
                         }
                     })
-                    .error(function(data, status) {
+                    .error(function(parameters) {
+                        var status = parameters.status;
                         deferred.reject(status);
                     });
             }
             return deferred.promise;
-        }
+        };
 
         getCategories = function() {
             var deferred = $q.defer();
@@ -88,7 +87,7 @@
                     });
             }
             return deferred.promise;
-        }
+        };
 
         add = function(category) {
             var deferred = $q.defer();
@@ -109,7 +108,6 @@
         };
 
         addGroceryItem = function(groceryTxt) {
-            // TODO: find category by id, push grocerytxt to groceries array, then return lists
             var deferred = $q.defer(),
                 itemData = groceryTxt.split(':');
 
@@ -127,7 +125,7 @@
             return deferred.promise;
         };
 
-        update = function(data) {
+        update = function() {
             // TODO: Implement
             return;
         };
@@ -150,5 +148,5 @@
             remove: remove,
             addGroceryItem: addGroceryItem
         };
-    })
+    });
 })();
