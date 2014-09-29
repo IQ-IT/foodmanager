@@ -3,8 +3,13 @@
  *
  */
 
+C/* global require, module */
+
 function DayPlan(date) {
-    if (!date) throw Error('Invalid parameters');
+    'use strict';
+    if (!date) {
+        throw Error('Invalid parameters');
+    }
     this.date = date;
     this.date.setHours(0, 0, 0, 0);
     this.morningMeal = '';
@@ -14,8 +19,11 @@ function DayPlan(date) {
 }
 
 DayPlan.prototype.addGroceryItem = function(item){
+    'use strict';
     var self = this;
-    if (!item.hasOwnProperty('category' || !item.hasOwnProperty('item'))) throw new Error('Not a GroceryItem');
+    if (!item.hasOwnProperty('category' || !item.hasOwnProperty('item'))) {
+        throw new Error('Not a GroceryItem');
+    }
     self.groceries.push(item);
 };
 
