@@ -3,10 +3,12 @@
  *
  */
 
+/* global _, foodManagerApp */
+
 (function() {
     'use strict';
 
-    foodManagerApp.factory('groceriesSvc', ['$http', '$q', 'categorySvc', function($http, $q, categorySvc) {
+    foodManagerApp.factory('groceriesSvc', ['$q', 'categorySvc', function($q, categorySvc) {
         // vars
         var _shoppingLists,
             _updateList,
@@ -14,9 +16,9 @@
             getGroceries;
 
         // private methods
-        _updateList = function(list) {
-            
-        }
+        _updateList = function() {
+            // TODO: Implement or delete?
+        };
 
         // methods
         add = function(itemString) {
@@ -30,7 +32,7 @@
             deferred.resolve(_shoppingLists);
 
             return deferred.promise;
-        }
+        };
 
         getGroceries = function() {
             var deferred = $q.defer();
@@ -45,18 +47,18 @@
                                 id: cat.id,
                                 name: cat.name,
                                 items: []
-                            }
+                            };
                         });
                     });
             }
 
             return deferred.promise;
-        }
+        };
 
         return {
             getGroceries: getGroceries,
             add: add
-        }
+        };
     }]);
 })();
 

@@ -3,7 +3,10 @@
  *
  */
 
+/* global foodManagerApp */
+
 (function() {
+    'use strict';
     foodManagerApp.controller('shopCtrl', ['$scope', 'categorySvc', function ($scope, categorySvc) {
         $scope.header = 'Indkøbsliste';
         $scope.shoppingLists = [];
@@ -18,7 +21,7 @@
 
         $scope.toggleItem = function(item) {
             item.done = !(item.done);
-        }
+        };
 
         $scope.addGroceryItem = function() {
             if ($scope.addTxt) {
@@ -29,6 +32,6 @@
                         // TODO: $("#addTxt").focus();
                     });
             }
-        }
-    }])
+        };
+    }]);
 })();

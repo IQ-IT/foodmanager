@@ -2,9 +2,11 @@
  * Module dependencies.
  */
 
+/* global require, process, __dirname, console */
+
 var express = require('express');
 var routes = require('./routes/routes.js');
-var apiRoutes = require('./routes/apiRoutes.js')
+var apiRoutes = require('./routes/apiRoutes.js');
 var http = require('http');
 var path = require('path');
 var nconf = require('nconf');
@@ -28,7 +30,7 @@ app.use(require('less-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
+if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
@@ -41,5 +43,6 @@ routes.createRoutes(app);
 apiRoutes.createRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    'use strict';
+    console.log('Express server listening on port ' + app.get('port'));
 });

@@ -3,6 +3,8 @@
  *
  */
 
+/* global foodManagerApp */
+
 (function() {
     'use strict';
 

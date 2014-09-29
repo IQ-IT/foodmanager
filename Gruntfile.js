@@ -1,4 +1,7 @@
+/* global module */
+
 module.exports = function(grunt) {
+    'use strict';
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
@@ -17,8 +20,8 @@ module.exports = function(grunt) {
                 eqeqeq: true,
                 undef: true,
                 globals: {
-                    "jQuery": true,
-                    "angular": true
+                    'jQuery': true,
+                    'angular': true
                 }
             },
             ignores: {src: ['public/javascripts/libs/*.js']},
@@ -27,7 +30,7 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint')
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['uglify']);
 };
