@@ -3,6 +3,8 @@
  *
  */
 
+/* global require, describe, before, it */
+
 var should = require('should'),
     nconf = require('nconf'),
     Category = require('../modules/entities/Category'),
@@ -10,6 +12,7 @@ var should = require('should'),
     CategoryRepo = require('../modules/CategoryRepo');
 
 describe('CategoryRepo', function() {
+    'use strict';
     describe('when setup', function() {
         var repo;
 
@@ -20,6 +23,32 @@ describe('CategoryRepo', function() {
 
         it('should have necessary methods', function() {
             repo.should.have.properties('add', 'get', 'update');
+        });
+    });
+
+    describe('when adding', function() {
+        var repo, cat;
+        before(function() {
+            nconf.file('../config.json');
+            repo = new CategoryRepo();
+            cat = new Category('xx', 'TestCategory');
+        });
+
+        it('should be able to store category in storage', function() {
+            repo.add(cat, function() {
+                repo.get(cat.id, function(storedCat) {
+                    storedCat.should.have.property('id', cat.id);
+                });
+            });
+        });
+
+        it('should be able to update the category', function() {
+            cat.name = 'UpdatedName';
+            repo.update(cat, function() {
+                repo.get(cat.id, function(storedCat){
+                    storedCat.should.have.property('name', 'UpdatedName');
+                });
+            });
         });
     });
 });

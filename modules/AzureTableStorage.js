@@ -64,6 +64,19 @@ AzureTableStorage.prototype = {
             }
         });
     },
+    update: function(item, callback) {
+        'use strict';
+        var self = this;
+        item.RowKey = item.id;
+        item.PartitionKey = self.partitionKey;
+        self.storageClient.updateEntity(self.tableName, item, function(error) {
+            if(error) {
+                callback(error);
+            } else {
+                callback();
+            }
+        });
+    },
     delete: function(id, callback) {
         'use strict';
         var self = this;

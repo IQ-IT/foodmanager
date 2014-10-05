@@ -55,8 +55,12 @@ CategoryRepo.prototype = {
         'use strict';
 
         var self = this;
-        //TODO: Implement updating of category with groceryitems
-        // self.storage.update(category, callback);
+        var storeThis = {
+            id: category.id,
+            name: category.name,
+            storedCat: category.getStorageCategory()
+        };
+        self.storage.update(storeThis, callback);
     },
     delete: function(id, callback) {
         'use strict';
@@ -117,12 +121,14 @@ CategoryRepo.prototype = {
         callback({errorCode: '204'});
     },
     setGroceries: function(categoryId, groceries, callback) {
+        'use strict';
         var self = this;
         self.get(categoryId, function(category) {
             category.setGroceryItems(groceries);
             // TODO implement saving of updated category here
+            self.update(category, callback);
         });
     }
-}
+};
 
 module.exports = CategoryRepo;
