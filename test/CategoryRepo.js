@@ -50,5 +50,16 @@ describe('CategoryRepo', function() {
                 });
             });
         });
+
+        it ('should be able to save updated groceryitems', function() {
+            cat.addGroceryItem('Testitem');
+            repo.update(cat, function() {
+                repo.get(cat.id, function(storedCat) {
+                    storedCat.should.have.property('groceries');
+                    storedCat.groceries.should.have.lengthOf(1);
+                    storedCat.groceries[0].should.equal('Testitem');
+                });
+            });
+        });
     });
 });
