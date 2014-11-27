@@ -12,20 +12,6 @@ module.exports = function(grunt) {
                 src: 'public/javascripts/controllers/*.js',
                 dest: 'public/javascripts/foodmanager.controllers.min.js'
             }
-        },
-        jshint: {
-            options: {
-                curly: true,
-                eqnull: true,
-                eqeqeq: true,
-                undef: true,
-                globals: {
-                    'jQuery': true,
-                    'angular': true
-                }
-            },
-            ignores: {src: ['public/javascripts/libs/*.js']},
-            files: {src: ['public/javascripts/**/*.js']}
         }
     });
 

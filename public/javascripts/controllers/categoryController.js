@@ -9,6 +9,16 @@
     'use strict';
 
     foodManagerApp.controller('categoryCtrl', ['$scope', 'categorySvc', function ($scope, categorySvc) {
+        var updateCategory;
+
+        // private methods
+        updateCategory = function(category) {
+            categorySvc.update(category)
+                .then(function() {
+
+                });
+        };
+
         $scope.header = 'Kategorier';
         $scope.alerts = [];
         $scope.categories = [];

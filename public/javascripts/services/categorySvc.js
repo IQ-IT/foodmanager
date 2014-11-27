@@ -125,9 +125,15 @@
             return deferred.promise;
         };
 
-        update = function() {
-            // TODO: Implement
+        update = function(category) {
             return;
+            // TODO: Implement
+            var deferred = $q.defer();
+            $http(method:'POST', url:'/api/category', data: category)
+                .success(function(category) {
+
+                });
+            return deferred.promise();
         };
 
         remove = function(category) {
@@ -139,8 +145,6 @@
                 });
             return deferred.promise;
         };
-
-
 
         return {
             getCategories: getCategories,
