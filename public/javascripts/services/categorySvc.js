@@ -126,14 +126,20 @@
         };
 
         update = function(category) {
-            return;
-            // TODO: Implement
             var deferred = $q.defer();
-            $http(method:'POST', url:'/api/category', data: category)
+            $http({method:'POST', url:'/api/category/' + category.id, data: category})
                 .success(function(category) {
-
+                    getCategories()
+                        .then(
+                            function(cats) {
+                                deferred.resolve(cats);
+                            },
+                            function(error) {
+                                deferred.reject('Der opstod en fejl under opdateringen af kategorien');
+                            }
+                        );
                 });
-            return deferred.promise();
+            return deferred.promise;
         };
 
         remove = function(category) {
@@ -149,6 +155,7 @@
         return {
             getCategories: getCategories,
             add: add,
+            update: update,
             remove: remove,
             addGroceryItem: addGroceryItem
         };

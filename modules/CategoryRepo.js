@@ -53,7 +53,6 @@ CategoryRepo.prototype = {
     },
     update: function(category, callback) {
         'use strict';
-
         var self = this;
         var storeThis = {
             id: category.id,

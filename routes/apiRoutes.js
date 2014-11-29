@@ -28,7 +28,7 @@ function getCategories(req, res) {
         }
         res.json(result); 
     });
-};
+}
 
 // GET /api/categories/name/:name
 function getCategoriesByName(req, res) {
@@ -40,7 +40,7 @@ function getCategoriesByName(req, res) {
         }
         res.json(result);
     });
-};
+}
 
 // GET /api/category/:id
 function getCategory(req, res) {
@@ -52,7 +52,7 @@ function getCategory(req, res) {
         }
         res.json(result);
     });
-};
+}
 
 // DELETE /api/category/:id
 function deleteCategory(req, res) {
@@ -75,7 +75,7 @@ function updateCategory(req, res) {
     console.log(req.param('groceries'));
     res.send(501, 'Not implemented yet');
     // TODO: Implement above
-};
+}
 
 // PUT /api/category
 function addCategory(req, res) {
@@ -90,7 +90,7 @@ function addCategory(req, res) {
     catch(e) {
         res.send(400, 'Invalid category data');
     }
-};
+}
 
 exports.createRoutes = function(app) {
     app.get('/api/categories', getCategories);
@@ -99,4 +99,4 @@ exports.createRoutes = function(app) {
     app.post('/api/category/:id', updateCategory);
     app.get('/api/category/:id', getCategory);
     app.delete('/api/category/:id', deleteCategory);
-}
+};
