@@ -92,7 +92,7 @@ function addCategory(req, res) {
     }
 }
 
-exports.createRoutes = function(app) {
+module.exports.createRoutes = function(app) {
     app.get('/api/categories', getCategories);
     app.get('/api/categories/name/:name', getCategoriesByName);
     app.put('/api/category', addCategory);

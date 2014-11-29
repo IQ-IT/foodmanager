@@ -3,7 +3,7 @@
  *
  */
 
-C/* global require, module */
+/* global require, module */
 
 function DayPlan(date) {
     'use strict';
