@@ -17,7 +17,7 @@ describe('CategoryRepo', function() {
         var repo;
 
         before(function() {
-            nconf.file('../config.json');
+            nconf.file('config.json');
             repo = new CategoryRepo();
         });
 
@@ -26,10 +26,10 @@ describe('CategoryRepo', function() {
         });
     });
 
-    describe.skip('when adding', function() {
+    describe('when adding', function() {
         var repo, cat;
         before(function() {
-            nconf.file('../config.json');
+            nconf.file('config.json');
             repo = new CategoryRepo();
             cat = new Category('xx', 'TestCategory');
         });
@@ -41,6 +41,16 @@ describe('CategoryRepo', function() {
                 });
             });
         });
+    });
+
+    describe('when editing', function() {
+        var repo, cat;
+        before(function() {
+            nconf.file('config.json');
+            repo = new CategoryRepo();
+            cat = new Category('xx', 'TestCategory');
+            repo.add(cat, null);
+        });
 
         it('should be able to update the category', function() {
             cat.name = 'UpdatedName';
@@ -51,7 +61,7 @@ describe('CategoryRepo', function() {
             });
         });
 
-        it ('should be able to save updated groceryitems', function() {
+        it('should be able to save updated groceryitems', function() {
             cat.addGroceryItem('Testitem');
             repo.update(cat, function() {
                 repo.get(cat.id, function(storedCat) {

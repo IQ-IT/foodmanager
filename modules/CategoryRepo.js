@@ -38,7 +38,6 @@ CategoryRepo.prototype = {
 
         var self = this;
         self.storage.get(id, function(result) {
-            console.log(result);
             if (result.statuscode) {
                 callback({
                     errorCode: '404',
@@ -94,8 +93,6 @@ CategoryRepo.prototype = {
             .from(self.tableName)
             .where('PartitionKey == ?', self.partitionKey)
             .and('name eq ?', name);
-        console.log(qry);
-        // execute query
         self.storage.storageClient.queryEntities(qry, function(error, items) {
             if (error) {
                 callback({errorCode: '500', errorText: 'Error performing query!'});
@@ -116,7 +113,6 @@ CategoryRepo.prototype = {
     queryAll: function(qry, callback) {
         'use strict';
         var self = this;
-        console.log(qry);
         callback({errorCode: '204'});
     },
     setGroceries: function(categoryId, groceries, callback) {
@@ -124,7 +120,6 @@ CategoryRepo.prototype = {
         var self = this;
         self.get(categoryId, function(category) {
             category.setGroceryItems(groceries);
-            // TODO implement saving of updated category here
             self.update(category, callback);
         });
     }
