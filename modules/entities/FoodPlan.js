@@ -3,13 +3,14 @@
  *
  */
 
-/* global require, module */
+/* jslint node:true */
+
+'use strict';
 
 var moment = require('moment'),
     DayPlan = require('./DayPlan');
 
 function FoodPlan(name, startDate, endDate) {
-    'use strict';
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;

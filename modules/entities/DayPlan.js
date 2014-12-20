@@ -3,10 +3,11 @@
  *
  */
 
-/* global require, module */
+/* jslint node:true */
+
+'use strict';
 
 function DayPlan(date) {
-    'use strict';
     if (!date) {
         throw Error('Invalid parameters');
     }
@@ -19,7 +20,6 @@ function DayPlan(date) {
 }
 
 DayPlan.prototype.addGroceryItem = function(item){
-    'use strict';
     var self = this;
     if (!item.hasOwnProperty('category' || !item.hasOwnProperty('item'))) {
         throw new Error('Not a GroceryItem');

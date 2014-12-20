@@ -3,7 +3,9 @@
  *
  */
 
-/* global console, require, module */
+/* jslint node: true */
+
+'use strict';
 
 var azure = require('azure');
 var nconf = require('nconf');
@@ -13,8 +15,6 @@ var Category = require('./entities/Category');
 
 
 function CategoryRepo() {
-    'use strict';
-
     this.client = azure.createTableService(nconf.get('AzureAccountName'), nconf.get('AzureAccountKey'));
     this.tableName = 'categories';
     this.partitionKey = nconf.get('ApplicationName');
@@ -23,8 +23,6 @@ function CategoryRepo() {
 
 CategoryRepo.prototype = {
     add: function(category, callback) {
-        'use strict';
-
         var self = this;
         var storeThis = {
             id: category.id,
@@ -34,8 +32,6 @@ CategoryRepo.prototype = {
         self.storage.add(storeThis, callback);
     },
     get: function(id, callback) {
-        'use strict';
-
         var self = this;
         self.storage.get(id, function(result) {
             if (result.statuscode) {
@@ -51,7 +47,6 @@ CategoryRepo.prototype = {
         });
     },
     update: function(category, callback) {
-        'use strict';
         var self = this;
         var storeThis = {
             id: category.id,
@@ -61,12 +56,10 @@ CategoryRepo.prototype = {
         self.storage.update(storeThis, callback);
     },
     delete: function(id, callback) {
-        'use strict';
         var self = this;
         self.storage.delete(id, callback);
     },
     getAll: function(callback) {
-        'use strict';
         var self = this;
         self.storage.getAll(function(result) {
             if (result.length === 0) {
@@ -86,7 +79,6 @@ CategoryRepo.prototype = {
         });
     },
     getByName: function(name, callback) {
-        'use strict';
         var self = this;
         var qry = azure.TableQuery
             .select()
@@ -111,12 +103,10 @@ CategoryRepo.prototype = {
         });
     },
     queryAll: function(qry, callback) {
-        'use strict';
         var self = this;
         callback({errorCode: '204'});
     },
     setGroceries: function(categoryId, groceries, callback) {
-        'use strict';
         var self = this;
         self.get(categoryId, function(category) {
             category.setGroceryItems(groceries);
