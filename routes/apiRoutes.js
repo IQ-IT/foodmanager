@@ -5,9 +5,16 @@
 
 var Category = require('../modules/entities/Category');
 var CategoryRepo = require('../modules/CategoryRepo');
+var nconf = require('nconf');
+
+if (nconf.get('netState') != 'offline'){
+    console.log('We are offline');
+    CategoryRepo = require('../modules/MockedCategoryRepo');
+}
 
 // GET /api/categories
 function getCategories(req, res) {
+    console.log(nconf.get('netState'));
     repo = new CategoryRepo();
     // test for query
     if (!Object.keys(req.query).length) {
@@ -71,8 +78,10 @@ function updateCategory(req, res) {
     // recreate category from post params
     // update category by passing it to categoryrepo
     var repo = new CategoryRepo();
-    repo.setGroceries(req.params.id, req.param('groceries'));
-    console.log(req.param('groceries'));
+    console.log(req.body);
+    repo.update(req.body, function() {
+        
+    });
     res.send(501, 'Not implemented yet');
     // TODO: Implement above
 }

@@ -28,6 +28,7 @@ describe('CategoryRepo', function() {
 
     describe('when adding', function() {
         var repo, cat;
+
         before(function() {
             nconf.file('config.json');
             repo = new CategoryRepo();
@@ -45,6 +46,7 @@ describe('CategoryRepo', function() {
 
     describe('when editing', function() {
         var repo, cat;
+        
         before(function() {
             nconf.file('config.json');
             repo = new CategoryRepo();
