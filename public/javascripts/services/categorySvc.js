@@ -129,6 +129,7 @@
             var deferred = $q.defer();
             $http({method:'POST', url:'/api/category/' + category.id, data: category})
                 .success(function(category) {
+                    console.log('Getting categorylist');
                     getCategories()
                         .then(
                             function(cats) {
