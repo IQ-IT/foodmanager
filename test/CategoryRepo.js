@@ -3,6 +3,7 @@
  *
  */
 
+/* jslint node: true */
 /* global require, describe, before, it */
 
 var should = require('should'),
@@ -12,7 +13,6 @@ var should = require('should'),
     CategoryRepo = require('../modules/CategoryRepo');
 
 describe('CategoryRepo', function() {
-    'use strict';
     describe('when setup', function() {
         var repo;
 
