@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                     quiet: false,
                     clearRequireCache: true
                 },
-                src: ['test/*.js']
+                src: ['test/entities/Foodplan.js']
             }
         },
         watch: {
