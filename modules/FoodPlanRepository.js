@@ -21,7 +21,15 @@ function FoodPlanRepository() {
 }
 
 FoodPlanRepository.prototype = {
-    add: function() {},
+    add: function(foodplan, callback) {
+        var self = this;
+        var storeThis = {
+            id: foodplan.key,
+            name: foodplan.key,
+            storedPlan: foodplan.getStorageFoodPlan()
+        };
+        self.storage.add(storeThis, callback);
+    },
     get: function() {},
     update: function() {},
     delete: function() {},

@@ -8,6 +8,7 @@
 'use strict';
 
 var moment = require('moment'),
+    _ = require('lodash-node'),
     DayPlan = require('./DayPlan');
 
 function FoodPlan(params) {
@@ -29,11 +30,12 @@ function FoodPlan(params) {
 
     if (params.hasOwnProperty('year') && params.hasOwnProperty('week')) {
         var m = moment();
+        m.locale('da');
         m.year(params.year);
         m.isoWeek(params.week);
-        this.key = m.format('YYYYWW');
-        this.startDate = m.toDate();
+        this.startDate = m.weekday(0).toDate();
         this.endDate = m.clone().add('d', 6).toDate();
+        this.key = moment(this.endDate).format('YYYYWW');
     }
 
     // Setup plandays
@@ -43,5 +45,19 @@ function FoodPlan(params) {
         countDate = countDate.add('d', 1);
     }
 }
+
+FoodPlan.prototype = {
+    getStorageFoodPlan: function() {
+        var self = this;
+        return JSON.stringify(self);
+    },
+    parseStorageFoodPlan: function(storedPlan) {
+        var self = this;
+        var parsedPlan = JSON.parse(storedPlan);
+        console.log(parsedPlan);
+        _.assign(self, parsedPlan);
+        // TODO: Make parsing handle stored dates correctly
+    }
+};
 
 module.exports = FoodPlan;

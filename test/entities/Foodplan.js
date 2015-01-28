@@ -63,7 +63,19 @@ describe('Foodplan', function() {
         });
 
         it('should have a key with year and weeknumber', function() {
-            foodplan.key.should.equal('201401'); // ISO week numbering of test dates specified
+            foodplan.key.should.match(/\d{6}/); 
+        });
+
+        it('should have startDate 30-12-2013 for week 1 of 2014', function() {
+            moment(foodplan.startDate).format('DDMMYYYY').should.equal('30122013');
+        });
+
+        it('should have endDate 05-01-2014 for week 1 of 2014', function() {
+            moment(foodplan.endDate).format('DDMMYYYY').should.equal('05012014');
+        })
+
+        it('should have key 201401 for week 1 of 2014', function() {
+            foodplan.key.should.equal('201401');
         });
 
         it('should contain following props: "key", "startDate", "endDate", "planDays"', function() {
@@ -87,11 +99,28 @@ describe('Foodplan', function() {
             foodplan = new FoodPlan({year: year, week: weeknumber});
         });
 
+        it('should have props: key, startDate, endDate, planDays', function() {
+            foodplan.should.have.properties('key', 'startDate', 'endDate', 'planDays');
+        });
+
+        it('should have methods: getStorageFoodPlan, parseStorageFoodPlan', function() {
+            foodplan.should.have.properties('getStorageFoodPlan', 'parseStorageFoodPlan');
+        });
+
+        it('should be able to return json representation of itself', function() {
+            foodplan.getStorageFoodPlan().should.equal(JSON.stringify(foodplan));
+        });
+
+        it('should be able to hydrate itself from at stored category', function() {
+            var newPlan = new FoodPlan(1900, 1);
+            newPlan.parseStorageFoodPlan(foodplan.getStorageFoodPlan());
+            newPlan.should.equal(foodplan);
+        });
+
         it('should have a dayplan list containing dayplans', function() {
             for (var i = 0; i < foodplan.planDays.lenght; i++) {
                 foodplan.planDays[i].should.be.instanceof(DayPlan);    
             }
-            
         });
     });
 });
