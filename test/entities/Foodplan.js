@@ -82,7 +82,7 @@ describe('Foodplan', function() {
             foodplan.should.have.properties('key', 'startDate', 'endDate', 'planDays');
         });
 
-        it('should have prop planDays with 7 items', function() {
+        it('should have prop planDays with 7 items', function() {   
             // Test dates are monday through sunday = a week both days included
             foodplan.planDays.length.should.equal(7);
         });
@@ -114,7 +114,7 @@ describe('Foodplan', function() {
         it('should be able to hydrate itself from at stored category', function() {
             var newPlan = new FoodPlan(1900, 1);
             newPlan.parseStorageFoodPlan(foodplan.getStorageFoodPlan());
-            newPlan.should.equal(foodplan);
+            newPlan.should.match(foodplan);
         });
 
         it('should have a dayplan list containing dayplans', function() {

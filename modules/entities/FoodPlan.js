@@ -34,7 +34,7 @@ function FoodPlan(params) {
         m.year(params.year);
         m.isoWeek(params.week);
         this.startDate = m.weekday(0).toDate();
-        this.endDate = m.clone().add('d', 6).toDate();
+        this.endDate = m.clone().add(6, 'd').toDate();
         this.key = moment(this.endDate).format('YYYYWW');
     }
 
@@ -42,7 +42,7 @@ function FoodPlan(params) {
     var countDate = moment(this.startDate);
     while (this.endDate >= countDate) {
         this.planDays.push(new DayPlan(countDate.clone().toDate()));
-        countDate = countDate.add('d', 1);
+        countDate = countDate.add(1, 'd');
     }
 }
 
@@ -54,9 +54,12 @@ FoodPlan.prototype = {
     parseStorageFoodPlan: function(storedPlan) {
         var self = this;
         var parsedPlan = JSON.parse(storedPlan);
-        console.log(parsedPlan);
         _.assign(self, parsedPlan);
-        // TODO: Make parsing handle stored dates correctly
+        self.startDate = moment(self.startDate).toDate();
+        self.endDate = moment(self.endDate).toDate();
+        _.each(self.planDays, function(day) {
+            day.date = moment(day.date).toDate();
+        });
     }
 };
 

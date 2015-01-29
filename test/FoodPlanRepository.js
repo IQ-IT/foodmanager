@@ -36,13 +36,13 @@ describe('FoodPlanRepository', function() {
         });
     });
 
-    describe.skip('when doing crud operations', function() {
+    describe('when doing crud operations', function() {
         var repo, foodplan;
 
         before(function() {
             nconf.file('config.json');
             repo = new FoodPlanRepository();
-            foodplan = new FoodPlan({year: 2015, week: 1});
+            foodplan = new FoodPlan({year: 2015, week: 2});
         });
 
         it('should be able to add and get a FoodPlan in storage', function() {
@@ -51,6 +51,27 @@ describe('FoodPlanRepository', function() {
                     newplan.key.should.equal(foodplan.key);
                 });
             });
+        });
+
+        it('should be able to get a FoodPlan by key', function() {
+            repo.get('201502', function(plan) {
+                console.log('Blah');
+                plan.should.be.instanceOf(FoodPlan)
+                    .and.have.property('key', '201502');
+            });
+        });
+
+        it('should be able to get all foodplans in storage', function() {
+            repo.add(new FoodPlan({year: 2015, week: 3}));
+            repo.getAll(function(plans){
+                plans.length.should.equal(2);
+                plans[0].key.should.equal('201502');
+                plans[1].key.should.equal('201503');
+            });
+        });
+
+        it.skip('should be able to delete an already stored foodplan', function() {
+
         });
 
 

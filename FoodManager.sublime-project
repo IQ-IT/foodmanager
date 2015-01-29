@@ -6,5 +6,10 @@
 			"path": ".",
             "folder_exclude_patterns": ["node_modules"]
 		}
-	]
+	],
+    "settings": {
+        "todoreview": {
+            "exclude_folders": ["*node_modules*", "*.git*"]
+        }
+    }
 }
