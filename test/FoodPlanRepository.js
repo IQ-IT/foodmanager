@@ -36,7 +36,7 @@ describe('FoodPlanRepository', function() {
         });
     });
 
-    describe('when doing crud operations', function() {
+    describe.skip('when doing crud operations', function() {
         var repo, foodplan;
 
         before(function() {
@@ -45,32 +45,35 @@ describe('FoodPlanRepository', function() {
             foodplan = new FoodPlan({year: 2015, week: 2});
         });
 
-        it('should be able to add and get a FoodPlan in storage', function() {
+        it('should be able to add and get a FoodPlan in storage', function(done) {
             repo.add(foodplan, function(result) {
                 repo.get(foodplan.key, function(newplan) {
                     newplan.key.should.equal(foodplan.key);
+                done(); // This makes mocha wait for the callback to execute
                 });
             });
         });
 
-        it('should be able to get a FoodPlan by key', function() {
+        it('should be able to get a FoodPlan by key', function(done) {
             repo.get('201502', function(plan) {
-                console.log('Blah');
                 plan.should.be.instanceOf(FoodPlan)
                     .and.have.property('key', '201502');
+                done();
             });
         });
 
-        it('should be able to get all foodplans in storage', function() {
-            repo.add(new FoodPlan({year: 2015, week: 3}));
-            repo.getAll(function(plans){
-                plans.length.should.equal(2);
-                plans[0].key.should.equal('201502');
-                plans[1].key.should.equal('201503');
+        it('should be able to get all foodplans in storage', function(done) {
+            repo.add(new FoodPlan({year: 2015, week: 3}), function() {
+                repo.getAll(function(plans){
+                    plans.length.should.equal(2);
+                    plans[0].key.should.equal('201502');
+                    plans[1].key.should.equal('201503');
+                    done();
+                });
             });
         });
 
-        it.skip('should be able to delete an already stored foodplan', function() {
+        it('should be able to delete an already stored foodplan', function() {
 
         });
 

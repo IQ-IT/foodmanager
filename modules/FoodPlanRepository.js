@@ -34,7 +34,6 @@ FoodPlanRepository.prototype = {
     get: function(key, callback) {
         var self = this;
         self.storage.get(key, function(result) {
-            // TODO: Seems that this callback function never gets called
             if (result.statuscode) {
                 callback({
                     errorCode: 404,
@@ -43,16 +42,26 @@ FoodPlanRepository.prototype = {
                 return;
             }
             var plan = new FoodPlan({year: 1900, week: 1});
-            plan.parseStorageFoodPlan(result);
+            plan.parseStorageFoodPlan(result.storedPlan);
             callback(plan);
         });
     },
-    update: function() {},
-    delete: function() {},
+    update: function(foodplan, callback) {
+        var self = this;
+        var storeThis = {
+            id: foodplan.key,
+            name: foodplan.key,
+            storedPlan: foodplan.getStorageFoodPlan()
+        };
+        self.storage.update(storeThis, callback);
+    },
+    delete: function(key, callback) {
+        var self = this;
+        self.storage.delete(key, callback);
+    },
     getAll: function(callback) {
         var self = this;
         self.storage.getAll(function(result) {
-            // TODO: Seems that this callback function never gets called
             if (result.length === 0) {
                 callback({
                     errorCode: 204,
@@ -61,7 +70,7 @@ FoodPlanRepository.prototype = {
             }
             var plans = _.map(result, function(p) {
                 var plan = new FoodPlan({year: 1900, week: 1});
-                plan.parseStorageFoodPlan(p);
+                plan.parseStorageFoodPlan(p.storedPlan);
                 return plan;
             });
             callback(plans);
