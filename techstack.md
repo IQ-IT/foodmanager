@@ -38,7 +38,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [IQ-IT/foodmanager](https://github.com/IQ-IT/foodmanager)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|25<br/>Tools used|12/27/23 <br/>Report generated|
+|26<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -180,9 +180,9 @@ Full tech stack [here](/techstack.md)
 </table>
 
 
-## <img src='https://img.stackshare.io/group.svg' /> Open source packages (11)</h2>
+## <img src='https://img.stackshare.io/group.svg' /> Open source packages (12)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (11)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (12)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
@@ -196,6 +196,7 @@ Full tech stack [here](/techstack.md)
 |[less-middleware](https://www.npmjs.com/less-middleware)|N/A|01/22/14|Jesper Hauge |MIT|N/A|
 |[lodash-node](https://www.npmjs.com/lodash-node)|v2.4.1|11/29/14|Jesper Hauge |MIT|N/A|
 |[moment](https://www.npmjs.com/moment)|v2.8.3|01/28/15|Jesper Hauge |MIT|[CVE-2022-24785](https://github.com/advisories/GHSA-8hfj-j24r-96c4) (High)<br/>[CVE-2017-18214](https://github.com/advisories/GHSA-446m-mv8f-q348) (High)<br/>[](https://github.com/advisories/GHSA-hxf5-mg84-pj4m) (Moderate)<br/>[CVE-2016-4055](https://github.com/advisories/GHSA-87vv-r9j6-g5qv) (Moderate)|
+|[nconf](https://www.npmjs.com/nconf)|v0.6.9|01/22/14|Jesper Hauge |MIT|[CVE-2022-21803](https://github.com/advisories/GHSA-6xwr-q98w-rvg7) (High)|
 |[should](https://www.npmjs.com/should)|v3.1.4|11/29/14|Jesper Hauge |MIT|N/A|
 
 <br/>
